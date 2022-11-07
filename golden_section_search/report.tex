@@ -1,0 +1,66 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{indentfirst}
+
+%--------Margin of the page------------%
+\usepackage[margin=1in]{geometry}
+
+%--------Code Snipplet Setting------------%
+\usepackage{listings}
+\usepackage{xcolor}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+%--------Code Snipplet Setting------------%
+
+\begin{document}
+
+\section*{Golden section search algorithm}
+
+This example tries to find the minimizer of $f(x) = 10(x-1)^4 - 4\sin(3x)$
+
+The code for \lstinline{golden.m} is written as follow:
+
+\lstinputlisting[language=Matlab]{golden.m}
+
+The code for function $f$ is written as follow:
+
+\lstinputlisting[language=Matlab]{f.m}
+
+This is the script used to test the function and printing the result. The easiest systematic way to find suitable $b$ is to increment its value until it works.
+
+\lstinputlisting[language=Matlab]{script_test.m}
+
+And the result is 
+
+\lstinputlisting[]{result.txt}
+
+The result up to 4 sig. fig. is 0.5969.
+
+\end{document}
