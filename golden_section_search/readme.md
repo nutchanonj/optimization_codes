@@ -1,3 +1,5 @@
+# Golden section line search algorithm.
+
 The algorithm is contained in a function `golden.m`.
 
 The optimized function is contained in `f.m`.
