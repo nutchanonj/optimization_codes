@@ -1,6 +1,8 @@
 # Optimization MATLAB codes
 My repository for gathering optimization algorithm codes in MATLAB
 
+This is a part of my works in CUEE505 Introduction to Optimization Techniques, Dept. of EE, Chulalongkorn University.
+
 - **Newton line search algorithm.** (`newton_search_1var`)
 - **Golden section line search algorithm.** (`golden_section_search`)
 - **Newton's method to find a root of equations system.** (`newton_root_finding`)
