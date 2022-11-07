@@ -8,8 +8,3 @@ end
 
 fprintf("Number of f calculations:           %i \n", nF)
 fprintf("Number of gradient calculations:    %i \n", nG)
-
-%% Plot trajectory.
-tp = theaterPlot("XLim",[-20 20],"YLim",[-20 20]);
-trajPlotter = trajectoryPlotter(tp,'DisplayName','Trajectory');
-plotTrajectory(trajPlotter,{Xk'})
