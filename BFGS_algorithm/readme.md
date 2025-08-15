@@ -1,8 +1,8 @@
-# BFGS algorithm for finding minimizer of 2-variable function.
+# BFGS algorithm for finding a minimizer of a 2-variable function.
 
-This work uses BFGS algorithm for finding minimizer. The line search uses a **strong backtrack search**, which is brought from *Numerical Optimization* by Jorge Nocedal and Stephen J. Wright.
+This work uses the BFGS algorithm to find a minimizer. The line search uses a **strong backtrack search**, which is brought from *Numerical Optimization* by Jorge Nocedal and Stephen J. Wright.
 
-The strong backtrack search algorithm is contained in a function `StrongBacktrack.m`. For further detail, please refer to the report in a pdf format. Also, you can refer to the original work in *Numerical Optimization* by Jorge Nocedal and Stephen J. Wright.
+The strong backtrack search algorithm is contained in a function `StrongBacktrack.m`. For further details, please refer to the report in a PDF format. Also, you can refer to the original work in *Numerical Optimization* by Jorge Nocedal and Stephen J. Wright.
 
 The BFGS algorithm is given in `BFGS.m`.
 
