@@ -46,14 +46,14 @@
 
 \section*{Searching minimizer of 2-variable function.}
 
-This example tries to find a minimizer of this Rosenblock function:
+This example tries to find a minimizer of this Rosenbrock function:
 $$f(x_1,x_2) = 100( x_2 - x_1^2 )^2 + ( 1 - x_1 )^2$$
 
 The \lstinline{FunctionName.m} is modified to
 
 \lstinputlisting[language=Matlab]{FunctionName.m}
 
-The \lstinline{golden.m} is modified to be as follow. The description is already included in the code.
+The \lstinline{golden.m} is modified to be as follows. The description is already included in the code.
 
 \lstinputlisting[language=Matlab]{golden.m}
 
@@ -61,15 +61,15 @@ The \lstinline{Newton.m} is here.
 
 \lstinputlisting[language=Matlab]{Newton.m}
 
-Note: In the golden-section line search subproblems in a Newton's search, since we don't know about the size of a searching direction vector at all, many sizes of interval have to be tested for eligibility of golden section search. The method is to choose $(1.5^j)s_k$ for $j = -20$ to $j = 20$ for the interval. If there is not success, change to the steepest descent method.
+Note: In the golden-section line search subproblems in Newton's search, since we don't know the size of the searching direction vector at all, many sizes of interval have to be tested for eligibility of the golden section search. The method is to choose $(1.5^j)s_k$ for $j = -20$ to $j = 20$ for the interval. If there is no success, change to the steepest descent method.
 
-Similarly, In the steepest descent method, we also don't know about the size of a searching direction vector at all. Choosing $(1.5^j)s_k$ for $j = -20$ to $j = 200$ for the interval. ($1.5^{200}$ is already so huge.) If there is not success, we are hopeless, setting \lstinline{IFLAG} to be -999.
+Similarly, in the steepest descent method, we also don't know the size of the searching direction vector at all. Choosing $(1.5^j)s_k$ for $j = -20$ to $j = 200$ for the interval. ($1.5^{200}$ is already so huge.) If there is no success, we are hopeless, setting \lstinline{IFLAG} to -999.
 
-The number $1.5$ is chosen meticulously. I've tried the base of exponentiations to be $2$, but the size of intervals changes too quickly that they sometimes aren't satisfied to the golden-section search criterion at all.
+The number $1.5$ is chosen meticulously. I've tried the base of exponentiations to be $2$, but the size of intervals changes too quickly, so they sometimes aren't satisfied with the golden-section search criterion at all.
 
-The values of \lstinline{e_rel} and \lstinline{e_abs} are chosen to be $1 \times 10^{-2}$ and $1 \times 10^{-4}$, respectively. If the \lstinline{e_rel} is smaller than this, there will likely be scenarios that the stop condition of line search is not satisfied. Also, \lstinline{e_abs} is chosen to this value to ease the \lstinline{e_rel} condition when the gradient is so small in the very final steps. If the \lstinline{e_abs} is smaller than this, there will also likely be scenarios that the stop condition of line search is not satisfied, too.
+The values of \lstinline{e_rel} and \lstinline{e_abs} are chosen to be $1 \times 10^{-2}$ and $1 \times 10^{-4}$, respectively. If the \lstinline{e_rel} is smaller than this, there will likely be scenarios in which the stop condition of the line search is not satisfied. Also, \lstinline{e_abs} is chosen to this value to ease the \lstinline{e_rel} condition when the gradient is so small in the very final steps. If the \lstinline{e_abs} is smaller than this, there will also likely be scenarios in which the stop condition of the line search is not satisfied, too.
 
-The script use to test the function and to generate the report is provided here:
+The script used to test the function and to generate the report is provided here:
 
 \lstinputlisting[language=Matlab]{script_test.m}
 
@@ -80,7 +80,7 @@ And this is the reported tabular.
 From the report, the value of $x^*$ is $\begin{bmatrix}
     1.0000 & 1.0000
 \end{bmatrix}^T$ up to 4 significant digits, and the value of $f_{min}$ is $0.0000$ up to 4 decimals. The gradient of the last step has a value of $\begin{bmatrix}
-    -0.00003 & 0.00002
+ -0.00003 & 0.00002
 \end{bmatrix}^T$ up to 5 decimals. 
 
 You can see that from the number of needed calculations, this is not efficient at all.

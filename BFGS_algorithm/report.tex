@@ -48,50 +48,50 @@
 
 \subsection*{Line search procedure}
 
-The method is adapted directly from \emph{Numerical Optimization} by Jorge Nocedal and Stephen J. Wright, called the \emph{strong backtracking}. The procedure will be given with later explanation.
+The method is adapted directly from \emph{Numerical Optimization} by Jorge Nocedal and Stephen J. Wright, called the \emph{strong backtracking}. The procedure will be explained later.
 \begin{enumerate}
-    \item Set $a = 1$. Set $a_{old} = 0$ then goto 2.
+    \item Set $a = 1$. Set $a_{old} = 0$, then go to 2.
     \item If $f(x + as) > f(x) + \mu a s^T \nabla f(x)$ or $f(x + a s) > f(x + a_{old})$, then set $a_{low} = a_{old}$ and $a_{high} = a$ and go to step 6. Else, go to step 3.
     \item If $|s^T \nabla f(x + as)| \leq -\eta s^T \nabla f(x)$, then $\lambda = a$ and Exit. Else, go to step 4.
     \item If $s^T \nabla f(x + as) \geq 0$ then set $a_{low} = a_{old}$ and $a_{high} = a$ and go to step 6. Else, go to step 5.
     \item Let $a_{old} = a$ and $a = 2a$. Back to step 2.
-    \item Set $f_{low} = f(x + a_{low}s)$. goto step 7. Note that this value will be fixed regardless of changing $a_{low}$.
-    \item Use binary search or golden section search to find suitable $a$ between $a_{low}$ and $a_{high}$.
+    \item Set $f_{low} = f(x + a_{low}s)$. Go to step 7. Note that this value will be fixed regardless of changing $a_{low}$.
+    \item Use binary search or golden section search to find a suitable $a$ between $a_{low}$ and $a_{high}$.
     \begin{enumerate}
         \item For binary search, let $a = (a_{low} + a_{high})/2$
         \item For golden section search, let $c = a_{low} + (a_{high} - a_{low})/\phi$ and $d = a_{high} - (a_{high} - a_{low})/\phi$, where $\phi$ is a golden ratio. If $f(x + cs) < f(x + ds)$, let $a = c$. Otherwise, let $a = d$.
     \end{enumerate}
-    Then goto step 8.
-    \item If $f(x + as) > f(x) + \mu a s^T \nabla f(x)$ or $f(x + a s) > f_{low}$, then let $a_{high} = a$. Then go back to step 7. Else, goto step 9.
+    Then go to step 8.
+    \item If $f(x + as) > f(x) + \mu a s^T \nabla f(x)$ or $f(x + a s) > f_{low}$, then let $a_{high} = a$. Then go back to step 7. Else, go to step 9.
     \item If $|s^T \nabla f(x + as)| \leq -\eta s^T \nabla f(x)$, then $\lambda = a$ and Exit. Else, go to step 10.
     \item If $(s^T \nabla f(x + as))(a_{high} - a_{low}) \geq 0$, then let $a_{high} = a_{low}$ and goto step 11.
     \item Let $a_{low} = a$ and back to step 7.
 \end{enumerate}
 
-The step-by-step explanation is as follow:
+The step-by-step explanation is as follows:
 \begin{enumerate}
     \item $a$ is representing $\lambda$. Let it be $1$ first.
-    \item If $f(x + as) > f(x) + \mu a s^T \nabla f(x)$, then it is violating first Wolfe's condition. It is thus ensuring that the bracket $(a_{old},a)$ will contain range that is not violating that. (The slope at $s^T \nabla f(x + a_{old}s)$ is always negative according to step 4, so that $(a_{old},a)$ must contain local minimum, that is, containing second Wolfe's point.) Also, $f(x + a s) > f(x + a_{old})$ is indicating that the function is going to increase, thus $(a_{old},a)$ must also contain local minimum (that is second Wolfe's point, too.) Note that $a_{high}$ and $a_{low}$ can swap regardless of their values.
-    \item The first Wolfe's condition is already checked in step 2. Thus, if the point also satisfies second Wolfe's condition, then let it be $\lambda$ and exit.
+    \item If $f(x + as) > f(x) + \mu a s^T \nabla f(x)$, then it is violating first Wolfe's condition. It is thus ensuring that the bracket $(a_{old},a)$ will contain a range that does not violate that. (The slope at $s^T \nabla f(x + a_{old}s)$ is always negative according to step 4, so that $(a_{old},a)$ must contain local minimum, that is, containing second Wolfe's point.) Also, $f(x + a s) > f(x + a_{old})$ is indicating that the function is going to increase, thus $(a_{old},a)$ must also contain local minimum (that is second Wolfe's point, too.) Note that $a_{high}$ and $a_{low}$ can swap regardless of their values.
+    \item The first Wolfe's condition is already checked in step 2. Thus, if the point also satisfies the second Wolfe's condition, then let it be $\lambda$ and exit.
     \item If $s^T \nabla f(x + as) \geq 0$ then it is indicating that the function is going to increase, thus $(a_{old},a)$ must contain local minimum (that is second Wolfe's point.) (It is cleared because $s^T \nabla f(x + a_{old}s)$ is always negative.) Also, note that $a_{high}$ and $a_{low}$ can swap regardless of their values.
-    \item If the range $(a_{old},a)$ is not containing second Wolfe's point, slide it to the immediate right and expand it two times.
-    \item This evaluated value will be used in the step 8.
-    \item Finding $a$ between $a_{high}$ and $a_{low}$. $a$ will converge to range which satisfies second Wolfe's condition.
+    \item If the range $(a_{old},a)$ does not contain the second Wolfe's point, slide it to the immediate right and expand it two times.
+    \item This evaluated value will be used in step 8.
+    \item Finding $a$ between $a_{high}$ and $a_{low}$. $a$ will converge to a range that satisfies the second Wolfe's condition.
     \item If $f(x + as) > f(x) + \mu a s^T \nabla f(x)$ or $f(x + a s) > f_{low}$, then $f(x + a s)$ value is to big. Thus, let $a_{high}$ be it to lower the upper bound.
-    \item The first Wolfe's condition is already checked in step 8. Thus, if the point also satisfies second Wolfe's condition, then let it be $\lambda$ and exit.
-    \item $(s^T \nabla f(x + as))(a_{high} - a_{low}) \geq 0$, together with step 11, ensures us that the range between $a_{high}$ and $a_{low}$ always contain local minimum(s). To see that, let $a_{high} < a_{low}$, so $a_{high} - a_{low} < 0$. Moreover, the slope at $a_{high}$ must be negative and the slope at $a_{low}$ must be positive (from step 2, step 4, and recursive characteristics that happens here.) $a_{high} < a < a_{low}$ must be true, and in step 11 $a_{low}$ becomes $a$, so the slope at $a$ must be positive. If the slope at $a$ is negative, then, $a_{high}$ must be swap with $a_{low}$ to make the slope of $a_{high}$ positive. Then  between $a_{high}$ and $a$ will be ensured to have local minimum. The same is applied when $a_{high} > a_{low}$. Just swap the pair accordingly and we will get the same proof.
+    \item The first Wolfe's condition is already checked in step 8. Thus, if the point also satisfies the second Wolfe's condition, then let it be $\lambda$ and exit.
+    \item $(s^T \nabla f(x + as))(a_{high} - a_{low}) \geq 0$, together with step 11, ensures us that the range between $a_{high}$ and $a_{low}$ always contain local minimum(s). To see that, let $a_{high} < a_{low}$, so $a_{high} - a_{low} < 0$. Moreover, the slope at $a_{high}$ must be negative and the slope at $a_{low}$ must be positive (from step 2, step 4, and recursive characteristics that happens here.) $a_{high} < a < a_{low}$ must be true, and in step 11 $a_{low}$ becomes $a$, so the slope at $a$ must be positive. If the slope at $a$ is negative, then $a_{high}$ must be swapped with $a_{low}$ to make the slope of $a_{high}$ positive. Then between $a_{high}$ and $a$ will be ensured to have a local minimum. The same is applied when $a_{high} > a_{low}$. Just swap the pair accordingly, and we will get the same proof.
     \item Let $a_{low} = a$ to shorten the length.
 \end{enumerate}
 
-From the book \emph{Numerical Optimization}, step 2 to step 5 are called \emph{Bracket phase}, and step 7 to step 11 are called \emph{Zoom phase}.
+From the book \emph{Numerical Optimization}, steps 2 to 5 are called \emph{Bracket phase}, and steps 7 to 11 are called \emph{Zoom phase}.
 
 \subsection*{BFGS algorithm}
 
-First is an implementation of \lstinline{StrongBacktrack.m}. The explanation is already given in greater details in the last section. I choose to use the binary search because it usually give less steps than the golden section search.
+First is an implementation of \lstinline{StrongBacktrack.m}. The explanation is already given in greater detail in the last section. I chose to use the binary search because it usually takes fewer steps than the golden section search.
 
 \lstinputlisting[language=Matlab]{StrongBacktrack.m}
 
-Implementation of function \lstinline{BFGS.m} is given here. The \lstinline{epsilon} value is used to give a threshold for norm of gradient (the gradient of local minimum must converge to zero.)
+Implementation of function \lstinline{BFGS.m} is given here. The \lstinline{epsilon} value is used to give a threshold for the norm of the gradient (the gradient of the local minimum must converge to zero).
 
 \lstinputlisting[language=Matlab]{BFGS.m}
 
@@ -111,7 +111,7 @@ The reported tabular is given here when setting \lstinline{x0 = [10;12], epsilon
 
 \lstinputlisting{report_eta095.txt}
 
-The result indicates that when \lstinline{eta} is higher, the line search is less rigorous, so it required more step to reach the 2-D local minimum. However, when \lstinline{eta} is higher, number of function value and gradient calculations is lower since the less rigorous line search, too.
+The result indicates that when \lstinline{eta} is higher, the line search is less rigorous, so it requires more steps to reach the 2-D local minimum. However, when \lstinline{eta} is higher, the number of function value and gradient calculations is lower since the less rigorous line search, too.
 
 
 

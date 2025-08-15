@@ -41,19 +41,19 @@
 
 \begin{document}
 
-\section*{Newton's method to find a root of equations system.}
+\section*{Newton's method to find a root of a system of equations.}
 
-This example tries to find any one of the roots of below nonlinear system:
+This example tries to find any one of the roots of the following nonlinear system:
 \begin{align*}
     x_1^2 + x_2^2 - 1 &= 0 \\
     5x_1^2 - x_2 - 2 &= 0
 \end{align*}
 
-This is the code for Newton-Raphson algorithm.
+This is the code for the Newton-Raphson algorithm.
 
 \lstinputlisting[language=Matlab]{newton.m}
 
-This is the code for the particular function handling.
+This is the code for handling the particular function.
 
 \lstinputlisting[language=Matlab]{FunctionName.m}
 
@@ -61,7 +61,7 @@ This is the main script file, together with the code used to generate the table 
 
 \lstinputlisting[language=Matlab]{script_test.m}
 
-The result is reported as in this table.
+The result is reported in this table.
 
 \lstinputlisting[]{result.txt}
 
@@ -71,6 +71,6 @@ The result is reported as in this table.
     \caption{The graphs of $x_1^2 + x_2^2 - 1 = 0$ and $5x_1^2 - x_2 - 2 = 0$.}
 \end{figure}
 
-From the graphic, there are 4 solutions in this nonlinear system. The result from the iteration, $(x_1,x_2) = (0.732,0.681)$ is represented by the upper-right point of the 4 intersection points (which are the solutions of nonlinear system.) 
+From the graphic, there are 4 solutions in this nonlinear system. The result from the iteration, $(x_1,x_2) = (0.732,0.681)$, is represented by the upper-right point of the 4 intersection points (which are the solutions of the nonlinear system). 
 
 \end{document}
